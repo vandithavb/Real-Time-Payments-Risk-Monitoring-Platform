@@ -64,6 +64,57 @@ services:
     networks:
       - payments-network
 
+  jobmanager:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.flink
+    image: pyflink-stripe
+    container_name: jobmanager
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./:/opt/flink/usrlib
+    command: jobmanager
+    environment:
+      - RAW_TOPIC=stripe.raw
+      - PROCESSED_TOPIC=stripe.processed
+      - DLQ_TOPIC=stripe.dlq
+      - KAFKA_BOOTSTRAP=redpanda:9092
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        jobmanager.memory.process.size: 1600m
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    networks:
+      - payments-network
+
+  taskmanager:
+    image: pyflink-stripe
+    container_name: taskmanager
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      jobmanager:
+        condition: service_started
+    volumes:
+      - ./:/opt/flink/usrlib
+    command: taskmanager
+    environment:
+      - RAW_TOPIC=stripe.raw
+      - PROCESSED_TOPIC=stripe.processed
+      - DLQ_TOPIC=stripe.dlq
+      - KAFKA_BOOTSTRAP=redpanda:9092
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.memory.process.size: 1024m
+        taskmanager.numberOfTaskSlots: 2
+        parallelism.default: 1
+    networks:
+      - payments-network
+
 networks:
   payments-network:
     driver: bridge

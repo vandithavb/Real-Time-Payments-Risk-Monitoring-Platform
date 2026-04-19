@@ -1,0 +1,24 @@
+FROM flink:2.2.0-scala_2.12-java17
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip python3-venv wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/pyflink
+
+COPY requirements-flink.txt .
+
+RUN python3 -m venv /opt/pyflink/.venv
+ENV PATH="/opt/pyflink/.venv/bin:$PATH"
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements-flink.txt
+
+WORKDIR /opt/flink/lib
+RUN wget https://repo.maven.apache.org/maven2/org/apache/flink/flink-json/2.2.0/flink-json-2.2.0.jar && \
+    wget https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kafka/4.0.1-2.0/flink-sql-connector-kafka-4.0.1-2.0.jar
+
+WORKDIR /opt/flink

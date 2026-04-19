@@ -83,15 +83,12 @@ def normalize_event(message: dict) -> dict:
             "source_system": source_system,
             "ingested_at": ingested_at,
             "stripe_event_created": event_created,
-
             "payment_intent_id": event_object.get("id"),
             "charge_id": None,
             "customer_id": event_object.get("customer"),
-
             "amount": event_object.get("amount"),
             "currency": event_object.get("currency"),
             "status": event_object.get("status"),
-
             "capture_method": event_object.get("capture_method"),
             "payment_method_types": event_object.get("payment_method_types"),
         }
