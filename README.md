@@ -1,4 +1,9 @@
 # 🚀 Real-Time Payments Risk Monitoring Platform
+![Kafka](https://img.shields.io/badge/Kafka-000000?style=for-the-badge&logo=apachekafka)
+![Flink](https://img.shields.io/badge/Flink-E6526F?style=for-the-badge&logo=apacheflink)
+![BigQuery](https://img.shields.io/badge/BigQuery-4285F4?style=for-the-badge&logo=googlebigquery)
+![dbt](https://img.shields.io/badge/dbt-FF694B?style=for-the-badge&logo=dbt)
+![Airflow](https://img.shields.io/badge/Airflow-017CEE?style=for-the-badge&logo=apacheairflow)
 
 ## 🎯 Goal
 
@@ -10,7 +15,7 @@ To build an end-to-end **real-time data pipeline** for monitoring payment transa
 
 This project implements a real-time data pipeline for processing payment events and detecting risk signals.
 
-It combines streaming ingestion (Kafka + Flink) with batch transformation (dbt) and orchestration (Airflow), reflecting a production-style architecture where real-time and analytical systems work together.
+It combines streaming ingestion (Kafka + Flink), scalable storage (BigQuery), transformation (dbt), and orchestration (Airflow), reflecting a production-style architecture where real-time and analytical systems work together.
 
 
 ---
