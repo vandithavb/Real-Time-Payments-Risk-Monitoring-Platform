@@ -160,6 +160,11 @@ stripe trigger payment_intent.succeeded
 ```bash
 python stripe_processor_job.py
 ```
+
+### Prerequisites
+Ensure the following BigQuery datasets are created:
+- stripe_dw (raw data)
+- stripe_analytics (dbt models)
 ### 5. Run BigQuery loader
 ```bash
 python bigquery_loader.py
