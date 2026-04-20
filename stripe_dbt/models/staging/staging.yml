@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_stripe_processed
+    description: Cleaned Stripe processed events from the streaming pipeline.
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+      - name: event_type
+        tests:
+          - not_null
+
+  - name: stg_stripe_dlq
+    description: Cleaned DLQ events from the streaming pipeline.
+    columns:
+      - name: failed_at
+        tests:
+          - not_null
+      - name: reason
+        tests:
+          - not_null

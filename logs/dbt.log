@@ -1,0 +1,31 @@
+[0m14:24:43.709782 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab47009a5a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab47220b080>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab4703db020>]}
+
+
+============================== 14:24:43.719528 | 84f14004-0ac0-440e-a18c-c2475788d83d ==============================
+[0m14:24:43.719528 [info ] [MainThread]: Running with dbt=1.11.8
+[0m14:24:43.721129 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'version_check': 'True', 'log_cache_events': 'False', 'use_experimental_parser': 'False', 'empty': 'None', 'use_colors': 'True', 'target_path': 'None', 'debug': 'False', 'quiet': 'False', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'indirect_selection': 'eager', 'log_path': 'logs', 'profiles_dir': '/home/codespace/.dbt', 'fail_fast': 'False', 'static_parser': 'True', 'invocation_command': 'dbt init stripe_dbt', 'warn_error': 'None', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'no_print': 'None', 'printer_width': '80', 'cache_selected_only': 'False', 'log_format': 'default'}
+[0m14:24:43.741720 [info ] [MainThread]: Creating dbt configuration folder at /home/codespace/.dbt
+[0m14:24:43.759802 [debug] [MainThread]: Starter project path: /workspaces/Real-Time-Payments-Risk-Monitoring-Platform/.venv/lib/python3.12/site-packages/dbt/include/starter_project
+[0m14:24:43.766710 [info ] [MainThread]: 
+Your new dbt project "stripe_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m14:24:43.767770 [info ] [MainThread]: Setting up your profile.
+[0m14:38:34.901594 [info ] [MainThread]: Profile stripe_dbt written to /home/codespace/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m14:38:34.905164 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 831.2627, "process_in_blocks": "5392", "process_kernel_time": 0.340738, "process_mem_max_rss": "221988", "process_out_blocks": "80", "process_user_time": 2.379546}
+[0m14:38:34.906318 [debug] [MainThread]: Command `dbt init` succeeded at 14:38:34.906159 after 831.26 seconds
+[0m14:38:34.907033 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab46f7ef770>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab4571d5b50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ab45774aba0>]}
+[0m14:38:34.907659 [debug] [MainThread]: Flushing usage events
+[0m14:38:34.971787 [debug] [MainThread]: An error was encountered while trying to flush usage events

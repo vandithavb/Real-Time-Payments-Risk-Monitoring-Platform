@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fct_successful_charges
+    description: Fact table for successful charge events from Stripe.
+    columns:
+      - name: charge_id
+        tests:
+          - not_null
+  - name: fct_risk_events
+    description: Fact table for risk-related payment events (failures, disputes, refunds).
+    columns:
+      - name: event_id
+        tests:
+          - not_null
