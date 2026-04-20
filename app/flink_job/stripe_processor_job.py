@@ -1,5 +1,5 @@
 """
-PyFlink Job: Stripe Event Normalizer (Production-Grade Risk Monitoring)
+PyFlink Job: Stripe Event Normalizer 
 =========================================================================
 Reads from stripe.raw, normalizes events with risk/fraud fields, 
 writes to stripe.processed or stripe.dlq
@@ -69,7 +69,7 @@ def to_iso_timestamp(unix_timestamp):
 
 
 # ============================================================================
-# NORMALIZATION LOGIC (PRODUCTION-GRADE)
+# NORMALIZATION LOGIC 
 # ============================================================================
 def normalize_event(message: dict) -> dict:
     """
