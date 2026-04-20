@@ -34,23 +34,38 @@ It demonstrates a **production-style data pipeline** combining streaming, batch 
 
 ---
 
+### Kafka Topics
+
+The following topics are used in the pipeline:
+
+- stripe.raw  
+- stripe.processed  
+- stripe.dlq  
+
+Topics may be auto-created by Redpanda when first written to.  
+For better control and reproducibility, they can be explicitly created:
+
+```bash
+rpk topic create stripe.raw
+rpk topic create stripe.processed
+rpk topic create stripe.dlq
+```
+
 ## 🔄 Data Flow
 
 1. Stripe sends webhook events → FastAPI  
 2. FastAPI publishes events to Kafka (`stripe.raw`)  
-3. PyFlink:
+3. PyFlink (stream processing):
    - normalizes events  
    - routes valid events → `stripe.processed`  
    - routes invalid/unsupported → `stripe.dlq`  
-4. BigQuery Loader:
-   - consumes Kafka topics  
+4. BigQuery Loader (consumer service):
+   - continuously reads from Kafka topics  
    - appends data to:
      - `stripe_dw.stripe_processed`  
      - `stripe_dw.stripe_dlq`  
-5. Airflow:
-   - triggers dbt transformations  
-6. dbt:
-   - builds staging + fact tables in `stripe_analytics`  
+5. Airflow triggers dbt workflows  
+6. dbt transforms raw data into analytics tables (`stripe_analytics`)
 
 ---
 
@@ -99,12 +114,14 @@ It demonstrates a **production-style data pipeline** combining streaming, batch 
 
 ![Airflow DAG](https://github.com/vandithavb/Real-Time-Payments-Risk-Monitoring-Platform/blob/main/images/airflow_dag.png)
 
-> Airflow DAG showing successful execution of dbt transformations (dbt_run → dbt_test).
+> Airflow DAG showing successful execution of dbt transformations (dbt_run → dbt_test).   
 
-- Airflow orchestrates dbt workflows
-- DAG: `dbt_run → dbt_test`
-- Ensures transformations run in correct order
-- Performs data quality validation
+- Airflow orchestrates the transformation layer using dbt  
+- DAG: `dbt_run → dbt_test`  
+- Ensures:
+  - transformations run in the correct order  
+  - data quality checks are executed after transformations  
+- Airflow does not process or move data — it only schedules and triggers workflows  
 
 ---
 
@@ -184,17 +201,17 @@ dbt test
 
 ---
 
-## 📌 Key Takeaway
+# 📌 Key Takeaway
 
-This project demonstrates a modern data engineering pipeline combining:
+This project demonstrates a complete modern data pipeline that combines:
 
-- real-time ingestion  
-- stream processing  
-- data warehousing  
-- transformation  
-- orchestration  
+- real-time ingestion using Kafka  
+- stream processing using Flink  
+- scalable storage using BigQuery  
+- transformation using dbt  
+- orchestration using Airflow  
 
----
+It reflects how real-time and batch systems work together in production-grade data architectures.
 
 ## 👤 Author
 
