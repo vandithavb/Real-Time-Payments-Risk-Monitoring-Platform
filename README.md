@@ -156,7 +156,7 @@ Trigger a test event:
 ```bash
 stripe trigger payment_intent.succeeded
 ```
-### 4. Start Flink job
+### 4. Start Flink job (stream processor - runs continuously)
 ```bash
 python stripe_processor_job.py
 ```
