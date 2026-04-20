@@ -8,9 +8,10 @@ To build an end-to-end **real-time data pipeline** for monitoring payment transa
 
 ## 📌 Overview
 
-This project ingests payment events from Stripe, processes them in real time using Kafka and Flink, stores them in BigQuery, transforms them using dbt, and orchestrates workflows using Airflow.
+This project implements a real-time data pipeline for processing payment events and detecting risk signals.
 
-It demonstrates a **production-style data pipeline** combining streaming, batch transformation, and orchestration.
+It combines streaming ingestion (Kafka + Flink) with batch transformation (dbt) and orchestration (Airflow), reflecting a production-style architecture where real-time and analytical systems work together.
+
 
 ---
 
@@ -50,6 +51,7 @@ rpk topic create stripe.raw
 rpk topic create stripe.processed
 rpk topic create stripe.dlq
 ```
+In production environments, auto topic creation is typically disabled.
 
 ## 🔄 Data Flow
 
@@ -165,7 +167,7 @@ python stripe_processor_job.py
 Ensure the following BigQuery datasets are created:
 - stripe_dw (raw data)
 - stripe_analytics (dbt models)
-### 5. Run BigQuery loader
+### 5. Start BigQuery loader (consumer - runs continuously)
 ```bash
 python bigquery_loader.py
 ```
