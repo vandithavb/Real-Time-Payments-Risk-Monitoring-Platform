@@ -55,6 +55,11 @@ It demonstrates a **production-style data pipeline** combining streaming, batch 
 ---
 
 ## 📊 Data Models (dbt)
+### 🔹 BigQuery Output
+
+![BigQuery Tables](https://github.com/vandithavb/Real-Time-Payments-Risk-Monitoring-Platform/blob/main/images/BigQuery.png)
+
+> BigQuery datasets showing raw (`stripe_dw`) and transformed (`stripe_analytics`) tables.
 
 ### 🔹 Staging Layer
 
@@ -89,6 +94,12 @@ It demonstrates a **production-style data pipeline** combining streaming, batch 
 ---
 
 ## ⚙️ Orchestration (Airflow)
+
+### 🔹 Airflow DAG Execution
+
+![Airflow DAG](https://github.com/vandithavb/Real-Time-Payments-Risk-Monitoring-Platform/blob/main/images/airflow_dag.png)
+
+> Airflow DAG showing successful execution of dbt transformations (dbt_run → dbt_test).
 
 - Airflow orchestrates dbt workflows
 - DAG: `dbt_run → dbt_test`
