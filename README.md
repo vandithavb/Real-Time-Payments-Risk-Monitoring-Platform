@@ -7,7 +7,7 @@
 
 ## 🎯 Goal
 
-To build an end-to-end **real-time data pipeline** for monitoring payment transactions and identifying risk signals using modern data engineering tools.
+Payment platforms require near-real-time visibility into failed charges, disputes, refunds, and malformed events to quickly detect and investigate financial risk. This project builds a real-time monitoring platform that ingests Stripe webhook events, validates and routes them using streaming pipelines, loads them into BigQuery, and transforms them into analytics-ready tables for revenue tracking and risk analysis.
 
 ---
 
@@ -33,7 +33,7 @@ It combines streaming ingestion (Kafka + Flink), scalable storage (BigQuery), tr
 - **API Layer**: FastAPI  
 - **Streaming Platform**: Kafka (Redpanda)  
 - **Stream Processing**: Apache Flink (PyFlink)  
-- **Data Warehouse**: Google BigQuery  
+- **Data Warehouse**: Google BigQuery  (tables partitioned by time and clustered for common query patterns)
 - **Transformation Layer**: dbt (BigQuery)  
 - **Orchestration**: Apache Airflow  
 - **Language**: Python  
@@ -70,7 +70,8 @@ In production environments, auto topic creation is typically disabled.
    - continuously reads from Kafka topics  
    - appends data to:
      - `stripe_dw.stripe_processed`  
-     - `stripe_dw.stripe_dlq`  
+     - `stripe_dw.stripe_dlq`
+   - `stripe_processed` is partitioned by `processed_at` and clustered by `customer_id`, `event_type`, `card_country`; `stripe_dlq` is partitioned by `failed_at` and clustered by `event_type`, `pipeline_version`
 5. Airflow triggers dbt workflows  
 6. dbt transforms raw data into analytics tables (`stripe_analytics`)
 
