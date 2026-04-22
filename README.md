@@ -208,7 +208,6 @@ dbt test
 
 - Implement **dbt incremental models** using `processed_at`  
 - Dockerize entire pipeline (Airflow + dbt + Flink)  
-- Deploy to cloud infrastructure  
 - Add alerting for high-risk events  
 - Implement CI/CD pipelines  
 
